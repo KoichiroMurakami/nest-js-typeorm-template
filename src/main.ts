@@ -1,13 +1,19 @@
-import { APP_PIPE, NestFactory } from '@nestjs/core'
+import { NestFactory } from '@nestjs/core'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { AppModule } from './app.module'
 import { join } from 'path'
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule)
+  const app = await NestFactory.create<NestExpressApplication>(
+    AppModule,
+  )
+  // NestExprtessApplicationの総称型を指定することにより、expressベースのアプリケーションを作成することが可能
 
-  app.useStaticAssets(join(__dirname, '..', 'public'))
-  app.setBaseViewsDir(join(__dirname, '..', 'views'))
+  // 静的ファイルの管理先
+  app.useStaticAssets(join(__dirname, 'public'))
+  // viewテンプレートの管理先
+  app.setBaseViewsDir(join(__dirname, 'views'))
+  // テンプレートエンジンを指定
   app.setViewEngine('ejs')
 
   await app.listen(3000);
