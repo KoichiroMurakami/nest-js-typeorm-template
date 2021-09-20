@@ -9,17 +9,14 @@ export class AppController {
   @Render('index')
   root() {
     return {
-      title: 'Nest sample app',
-      msg: 'hello'
+      title: 'Nest',
+      msg: 'konitiwa'
     }
   }
 
   @Post('/')
   @Render('index')
   send(@Body() form:any) {
-    return {
-      title: 'NestForm',
-      msg: JSON.stringify(form)
-    }
+    return form
   }
 }
